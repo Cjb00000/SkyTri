@@ -1,13 +1,6 @@
-# Skytri - OpenGL Learning Project
+# Skytri - Experiments in OpenGL
 
-A graphics learning project built with OpenGL 3.3, GLFW, GLM, and Glad. Features basic lighting with materials and a simple camera system.
-
-## Features
-
-- **Core Graphics**: OpenGL 3.3 with modern shader-based rendering
-- **Lighting**: Material-based lighting with ambient, diffuse, and specular components
-- **Camera**: Free-look camera with mouse and keyboard controls
-- **Dependencies**: All dependencies managed via git submodules
+Built with OpenGL 3.3, GLFW, GLM, and Glad.
 
 ## Setup
 
@@ -79,8 +72,7 @@ make
 │   ├── glm/          # Submodule: Math library
 │   ├── glad/         # Submodule: OpenGL loader
 │   └── includes/     # Local headers (glad.h, stb_image.h, etc)
-├── CMakeLists.txt    # Build configuration
-└── LICENSE           # MIT License
+└── CMakeLists.txt    # Build configuration
 ```
 
 ## Dependencies
@@ -90,11 +82,3 @@ All managed via git submodules:
 - **GLM** - Mathematics and vectors/matrices
 - **Glad** - OpenGL function loader
 - **STB Image** - Image loading (single-header library)
-
-## License
-
-MIT License - see [LICENSE](LICENSE) file for details
-
-## Credits
-
-Based on learnopengl.com tutorials for learning OpenGL fundamentals.
