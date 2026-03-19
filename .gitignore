@@ -24,8 +24,5 @@ cmake_install.cmake
 *.out
 *.app
 
-# Dependencies (external/ will be populated by git submodules)
-# Keep external/.gitkeep but ignore contents
-external/*
-!external/.gitkeep
-!external/.gitmodules
+# Note: external/ is populated by git submodules via .gitmodules
+# Don't ignore submodule directories
