@@ -1,0 +1,31 @@
+# Build directories
+build/
+Debug/
+Release/
+*.o
+*.obj
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Dependencies (external/ will be populated by git submodules)
+# Keep external/.gitkeep but ignore contents
+external/*
+!external/.gitkeep
+!external/.gitmodules

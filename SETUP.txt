@@ -1,0 +1,44 @@
+# skytri folder setup — ready for GitHub!
+
+Done! Here's what you've got:
+
+**Directory Structure:**
+```
+skytri/
+├── src/                    # Source files
+│   ├── Source.cpp
+│   ├── glad.c
+│   └── stb_image.cpp
+├── include/skytri/         # Project headers
+│   ├── shader_s.h
+│   └── camera.h
+├── shaders/                # GLSL shaders
+│   ├── 3.1.materials.vert
+│   ├── 3.1.materials.frag
+│   ├── 1.light_cube.vert
+│   └── 1.light_cube.frag
+├── assets/textures/        # Resources (empty for now)
+├── external/               # Git submodules (populate via git)
+├── CMakeLists.txt          # CMake build config
+├── .gitmodules             # Git submodule definitions
+├── .gitignore              # GitHub ignore rules
+└── README.md               # Setup instructions
+```
+
+**Next Steps:**
+1. Initialize git: `git init` in the skytri folder
+2. Add submodules: `git add .gitmodules .gitignore CMakeLists.txt` etc.
+3. Add the submodules:
+   ```bash
+   git submodule add https://github.com/glfw/glfw.git external/glfw
+   git submodule add https://github.com/g-truc/glm.git external/glm
+   git submodule add https://github.com/Dav1dde/glad.git external/glad
+   ```
+4. Build with CMake (Windows):
+   ```bash
+   mkdir build && cd build
+   cmake ..
+   cmake --build . --config Debug
+   ```
+
+All headers and includes have been updated to reference `skytri/` instead of `learnopengl/`.
