@@ -1,6 +1,4 @@
-# skytri folder setup — ready for GitHub!
-
-Done! Here's what you've got:
+# skytri folder setup
 
 **Directory Structure:**
 ```
@@ -40,5 +38,3 @@ skytri/
    cmake ..
    cmake --build . --config Debug
    ```
-
-All headers and includes have been updated to reference `skytri/` instead of `learnopengl/`.

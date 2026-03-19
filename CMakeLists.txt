@@ -12,9 +12,9 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 add_subdirectory(external/glfw)
 add_subdirectory(external/glm)
 
-# Add glad
-add_library(glad STATIC external/glad/src/glad.c)
-target_include_directories(glad PUBLIC external/glad/include)
+# Glad configuration - we use pre-built glad.c in src/
+# Create a minimal glad library target with headers
+add_library(glad INTERFACE)
 
 # Main executable
 add_executable(skytri
@@ -26,7 +26,7 @@ add_executable(skytri
 # Include directories
 target_include_directories(skytri PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/external/glad/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/external/glad_headers
     ${CMAKE_CURRENT_SOURCE_DIR}/external/glfw/include
     ${CMAKE_CURRENT_SOURCE_DIR}/external/glm
 )
@@ -42,5 +42,5 @@ target_link_libraries(skytri PRIVATE
 add_custom_command(TARGET skytri POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
     ${CMAKE_CURRENT_SOURCE_DIR}/shaders
-    $<CONFIG:Debug>$<IF:$<CONFIG:Debug>,${CMAKE_CURRENT_BINARY_DIR}/shaders,${CMAKE_CURRENT_BINARY_DIR}/Release/shaders>
+    ${CMAKE_CURRENT_BINARY_DIR}/shaders
 )
