@@ -26,7 +26,7 @@ add_executable(skytri
 # Include directories
 target_include_directories(skytri PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/external/glad_headers
+    ${CMAKE_CURRENT_SOURCE_DIR}/external/includes
     ${CMAKE_CURRENT_SOURCE_DIR}/external/glfw/include
     ${CMAKE_CURRENT_SOURCE_DIR}/external/glm
 )
