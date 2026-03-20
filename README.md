@@ -52,13 +52,6 @@ make
 ./build/skytri
 ```
 
-## Controls
-
-- **W/A/S/D** - Move forward/left/backward/right
-- **Mouse** - Look around (free-look camera)
-- **Scroll** - Zoom in/out
-- **ESC** - Exit
-
 ## Project Structure
 
 ```

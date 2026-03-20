@@ -12,6 +12,11 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 add_subdirectory(external/glfw)
 add_subdirectory(external/glm)
 
+# Assimp configuration
+set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(ASSIMP_BUILD_ASSIMP_TOOLS OFF CACHE BOOL "" FORCE)
+add_subdirectory(external/assimp)
+
 # Glad configuration - we use pre-built glad.c in src/
 # Create a minimal glad library target with headers
 add_library(glad INTERFACE)
@@ -26,6 +31,7 @@ add_executable(skytri
 # Include directories
 target_include_directories(skytri PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/external/assimp/include
     ${CMAKE_CURRENT_SOURCE_DIR}/external/includes
     ${CMAKE_CURRENT_SOURCE_DIR}/external/glfw/include
     ${CMAKE_CURRENT_SOURCE_DIR}/external/glm
@@ -33,6 +39,7 @@ target_include_directories(skytri PRIVATE
 
 # Link libraries
 target_link_libraries(skytri PRIVATE
+    assimp
     glfw
     glm::glm
     glad
