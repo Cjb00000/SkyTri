@@ -1,7 +1,7 @@
 # Skytri - Graphics Experiments
 
 A real-time OpenGL-based 3D rendering engine I develop in to deepen my understanding of graphics concepts and explore topics of interest.
-Built with OpenGL 3.3, Assimp, GLFW, GLM, and Glad. LearnOpenGL.com has been great a great resource.
+Built with OpenGL 3.3, Assimp, GLFW, GLM, and Glad. LearnOpenGL.com has been a great resource.
 
 ## Current Highlights 
 - Cloth Physics, Post-processing effects
