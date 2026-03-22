@@ -76,6 +76,7 @@ All managed via git submodules:
 - **Glad** - OpenGL function loader
 - **STB Image** - Image loading (single-header library)
 
-<video src="https://github.com/Cjb00000/SkyTri/raw/main/assets/recordings/Cape.mp4" width="100%" controls autoplay loop muted>
+<video width="100%" controls autoplay loop muted>
+  <source src="https://raw.githubusercontent.com/Cjb00000/SkyTri/main/assets/recordings/Cape.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
