@@ -1,10 +1,12 @@
 # Skytri - Graphics Experiments
 
 A real-time OpenGL-based 3D rendering engine I develop in to deepen my understanding of graphics concepts and explore topics of interest.
-Built with OpenGL 3.3, GLFW, GLM, and Glad. LearnOpenGL.com has been great a great resource.
+Built with OpenGL 3.3, Assimp, GLFW, GLM, and Glad. LearnOpenGL.com has been great a great resource.
 
 ## Current Highlights 
 - Cloth Physics, Post-processing effects
+
+https://github.com/user-attachments/assets/63a5d178-48e4-4884-abaa-076c2cba2836
 
 ### Future Improvements
 - Implement cloth physics using a compute shader (OpenGL 4.3 or higher)
@@ -71,6 +73,7 @@ make
 ├── shaders/          # GLSL shader files
 ├── assets/           # Textures and resources
 ├── external/         # Dependencies
+│   ├── assimp/       # Submodule: Model loading library
 │   ├── glfw/         # Submodule: Window and input library
 │   ├── glm/          # Submodule: Math library
 │   ├── glad/         # Submodule: OpenGL loader
@@ -81,12 +84,12 @@ make
 ## Dependencies
 
 All managed via git submodules:
+- **Assimp** - Model importing into a uniform/normalized data structure
 - **GLFW** - Window creation and input handling
 - **GLM** - Mathematics and vectors/matrices
 - **Glad** - OpenGL function loader
 - **STB Image** - Image loading (single-header library)
-
-https://github.com/user-attachments/assets/63a5d178-48e4-4884-abaa-076c2cba2836
+ 
 
 
 
