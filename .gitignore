@@ -28,4 +28,5 @@ cmake_install.cmake
 # Don't ignore submodule directories
 
 # Ignore the assets directory
-assets/
+assets/models/
+assets/textures/
