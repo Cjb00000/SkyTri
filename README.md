@@ -1,6 +1,16 @@
 # Skytri - Graphics Experiments
 
-Built with OpenGL 3.3, GLFW, GLM, and Glad.
+A real-time OpenGL-based 3D rendering engine I develop in to deepen my understanding of graphics concepts and explore topics of interest.
+Built with OpenGL 3.3, GLFW, GLM, and Glad. LearnOpenGL.com has been great a great resource.
+
+## Current Highlights 
+- Cloth Physics, Post-processing effects
+
+### Future Improvements
+- Implement cloth physics using a compute shader (OpenGL 4.3 or higher)
+- Add bounding boxes/spheres and collision detection for cloth physics. These bounding spheres will be beneficial to future collision testing as well.
+- Switch development to Vulkan
+- Endless features! (SSAO, Deferred Rendering, etc.)
 
 ## Setup
 
@@ -75,9 +85,6 @@ All managed via git submodules:
 - **GLM** - Mathematics and vectors/matrices
 - **Glad** - OpenGL function loader
 - **STB Image** - Image loading (single-header library)
-
-## Current Highlights 
-- Cloth Physics, Post-processing effects
 
 https://github.com/user-attachments/assets/63a5d178-48e4-4884-abaa-076c2cba2836
 
