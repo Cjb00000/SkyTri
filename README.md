@@ -76,7 +76,8 @@ All managed via git submodules:
 - **Glad** - OpenGL function loader
 - **STB Image** - Image loading (single-header library)
 
-Current Highlights: Cloth Physics, Post-processing effects
+## Current Highlights 
+- Cloth Physics, Post-processing effects
 
 https://github.com/user-attachments/assets/78792078-f2a5-45c7-a7d6-d0990a1fa342
 
