@@ -1,4 +1,4 @@
-# Skytri - Experiments in OpenGL
+# Skytri - Graphics Experiments
 
 Built with OpenGL 3.3, GLFW, GLM, and Glad.
 
@@ -75,3 +75,7 @@ All managed via git submodules:
 - **GLM** - Mathematics and vectors/matrices
 - **Glad** - OpenGL function loader
 - **STB Image** - Image loading (single-header library)
+
+<video src="assets/recordings/cape.mp4" width="100%" controls autoplay loop muted>
+  Your browser does not support the video tag.
+</video>

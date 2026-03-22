@@ -26,3 +26,6 @@ cmake_install.cmake
 
 # Note: external/ is populated by git submodules via .gitmodules
 # Don't ignore submodule directories
+
+# Ignore the assets directory
+assets/

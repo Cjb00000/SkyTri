@@ -9,7 +9,6 @@
 #include <skytri/shader.h>
 #include <skytri/camera.h>
 #include <skytri/model.h>
-#include <skytri/cloth.h>
 
 #include <iostream>
 
@@ -19,8 +18,8 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow *window);
 
 // settings
-const unsigned int SCR_WIDTH = 1920;
-const unsigned int SCR_HEIGHT = 1080;
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
 
 // camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
@@ -127,92 +126,57 @@ int main()
     glEnable(GL_DEPTH_TEST);
 
     // build and compile shaders
+    // -------------------------
     Shader ourShader("shaders/model_loading.vert", "shaders/model_loading.frag");
 
     // load models
+    // -----------
     Model ourModel(FileSystem::getPath("assets/models/firion/FirionEdited.obj"));
 
-    Shader clothShader("shaders/cloth.vert", "shaders/cloth.frag");
-
-    // ── Cape configuration ─────────────────────────────────────────
-    const int   CAPE_COLS        = 40;       // more cols = finer horizontal folds
-    const int   CAPE_ROWS        = 50;       // more rows = finer vertical folds
-    const float CAPE_STEP        = 0.015f;   // particle spacing (smaller = tighter cloth)
-    const float CAPE_SHOULDER_W  = 0.20f;    // width at top
-    const float CAPE_HIP_W       = 0.50f;    // width at bottom
-    const glm::vec3 CAPE_OFFSET  = glm::vec3(-0.05f, 1.35f, -0.2f);
-    const glm::vec3 CAPE_COLOR   = glm::vec3(0.8f, 0.9f, 1.0f);
-    const glm::vec3 CAPE_GRAVITY = glm::vec3(0.0f, 0.0f, 0.0f);  // reduce Y to stretch less
-    const glm::vec3 CAPE_WIND    = glm::vec3(0.1f, 0.0f, -1.0f);
-    const float     CAPE_TURB    = 4.0f;
-    // ───────────────────────────────────────────────────────────────
-
-    Cloth cape(CAPE_COLS, CAPE_ROWS, CAPE_STEP, false);
-
-    for (int y = 0; y < CAPE_ROWS; y++)
-    for (int x = 0; x < CAPE_COLS; x++)
-    {
-        float t = (float)x / (CAPE_COLS - 1);
-        float v = (float)y / (CAPE_ROWS - 1);
-        float halfWidth = glm::mix(CAPE_SHOULDER_W, CAPE_HIP_W, v);
-
-        auto& p = cape.particles[y * CAPE_COLS + x];
-        p.position     = glm::vec3(glm::mix(-halfWidth, halfWidth, t), -y * CAPE_STEP, 0.0f);
-        p.prevPosition = p.position;
-    }
-
-    for (auto& s : cape.springs)
-        s.restLength = glm::length(cape.particles[s.a].position - cape.particles[s.b].position);
-
-    for (int i = 0; i < CAPE_COLS; i++)
-        cape.particles[i].pinned = true;
+    
+    // draw in wireframe
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     // render loop
+    // -----------
     while (!glfwWindowShouldClose(window))
     {
+        // per-frame time logic
+        // --------------------
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
-        deltaTime = std::min(deltaTime, 0.02f); // cap at 50fps equivalent
 
+        // input
+        // -----
         processInput(window);
 
+        // render
         // First pass: render scene to FBO
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
         glEnable(GL_DEPTH_TEST);
         glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        ourShader.use();
-        ourShader.setVec3("lightPos", glm::vec3(5.0f, 5.0f, 5.0f));
 
+        // don't forget to enable shader before setting uniforms
+        ourShader.use();
+
+        ourShader.setVec3("lightPos", glm::vec3(5.0f, 5.0f, 5.0f));
+        ourShader.setVec3("viewPos", camera.Position);
+
+        // view/projection transformations
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
         ourShader.setMat4("projection", projection);
         ourShader.setMat4("view", view);
 
+        // render the loaded model
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
         ourModel.Draw(ourShader);
-
-        cape.update(deltaTime);
-
-        clothShader.use();
-        clothShader.setMat4("projection", projection);
-        clothShader.setMat4("view", view);
-        clothShader.setVec3("uColor", CAPE_COLOR);
-
-        glm::mat4 capeModel = glm::translate(glm::mat4(1.0f), CAPE_OFFSET);
-        clothShader.setMat4("model", capeModel);
-
-        cape.gravity      = CAPE_GRAVITY;
-        cape.wind         = CAPE_WIND;
-        cape.windTurbulence = CAPE_TURB;
-
-        //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        cape.draw();
-        //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);  // restore for everything else
 
         // Second pass: post-process to screen
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -228,9 +192,13 @@ int main()
         postShader.setInt("depthTex", 1);
         postShader.setFloat("near", 0.1f);
         postShader.setFloat("far", 10.0f);
+        // NOTE: I MODIFY HERE TO CHANGE PIXELATION EFFECT
+        postShader.setFloat("minPixelSize", 1.0f);   // close up: no pixelation
+        postShader.setFloat("maxPixelSize", 10.0f);  // far away: big blocks
 
         glBindVertexArray(quadVAO);
         glDrawArrays(GL_TRIANGLES, 0, 6);
+
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
