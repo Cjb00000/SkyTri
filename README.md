@@ -4,7 +4,7 @@ A real-time OpenGL-based 3D rendering engine I develop in to deepen my understan
 Built with OpenGL 3.3, Assimp, GLFW, GLM, and Glad.
 
 ## Current Highlights 
-- Cloth Physics Simulation, Post-processing effects
+- Cloth Physics Simulation (Verlet Integration), Post-processing effects via a custom framebuffer
 
 https://github.com/user-attachments/assets/63a5d178-48e4-4884-abaa-076c2cba2836
 
