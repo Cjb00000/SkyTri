@@ -19,10 +19,11 @@ CMakeFiles/
 Makefile
 cmake_install.cmake
 
-# Executables
+# Executables and App Settings
 *.exe
 *.out
 *.app
+imgui.ini
 
 # Note: external/ is populated by git submodules via .gitmodules
 # Don't ignore submodule directories

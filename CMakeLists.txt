@@ -21,6 +21,22 @@ add_subdirectory(external/assimp)
 # Create a minimal glad library target with headers
 add_library(glad INTERFACE)
 
+# ImGui
+add_library(imgui STATIC
+    external/imgui/imgui.cpp
+    external/imgui/imgui_draw.cpp
+    external/imgui/imgui_tables.cpp
+    external/imgui/imgui_widgets.cpp
+    external/imgui/backends/imgui_impl_glfw.cpp
+    external/imgui/backends/imgui_impl_opengl3.cpp
+)
+target_include_directories(imgui PUBLIC
+    external/imgui
+    external/imgui/backends
+    external/glfw/include
+)
+target_link_libraries(imgui PUBLIC glfw)
+
 # Main executable
 add_executable(skytri
     src/Source.cpp
@@ -35,6 +51,8 @@ target_include_directories(skytri PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/external/includes
     ${CMAKE_CURRENT_SOURCE_DIR}/external/glfw/include
     ${CMAKE_CURRENT_SOURCE_DIR}/external/glm
+    ${CMAKE_CURRENT_SOURCE_DIR}/external/imgui
+    ${CMAKE_CURRENT_SOURCE_DIR}/external/imgui/backends
 )
 
 # Link libraries
@@ -43,6 +61,7 @@ target_link_libraries(skytri PRIVATE
     glfw
     glm::glm
     glad
+    imgui
 )
 
 # Copy shaders to build directory

@@ -1,16 +1,41 @@
 # Skytri - Graphics Experiments
 
-A real-time OpenGL-based 3D rendering engine I develop in to deepen my understanding of graphics concepts and explore topics of interest.
-Built with OpenGL 3.3, Assimp, GLFW, GLM, and Glad. LearnOpenGL.com has been a great resource.
+A real-time OpenGL-based 3D rendering engine built with OpenGL 3.3, Assimp, GLFW, GLM, Glad and ImGui.
+
+References used:
+https://learnopengl.com/
+https://www.cs.cmu.edu/afs/cs/academic/class/15462-s13/www/lec_slides/Jakobsen.pdf
 
 ## Current Highlights 
-- Cloth Physics, Post-processing effects
+- Verlet integrated cloth physics with Position Based Dynamics constraint projection (Jakobsen method) for spring and collision constraints
+- Depth-based post-processing effects via a custom framebuffer
 
 https://github.com/user-attachments/assets/63a5d178-48e4-4884-abaa-076c2cba2836
 
+## How it works
+
+### Cloth simulation
+Each vertex of the imported cape mesh becomes a simulated particle. 
+Particles are connected by springs matching the mesh edges.
+
+**Verlet integration** moves each particle every frame:
+newPos = pos + (pos - prevPos) + accel * dt²
+Velocity is never stored - it falls out of the position history as 
+`(pos - prevPos)`. This means spring and collision corrections to 
+position automatically carry into the next frame's movement.
+
+**Jakobsen constraint projection** enforces spring lengths by directly 
+correcting positions rather than computing spring forces (F = kx). 
+This avoids the instability of force-based springs at high stiffness. 
+
+**PBD collision resolution** treats capsule collision the same way - 
+detect a violated constraint (particle inside capsule) and directly 
+project the position to satisfy it (push to surface). prevPosition 
+is adjusted to cancel inward velocity so the particle doesn't 
+re-enter next frame.
+
 ### Future Improvements
 - Implement cloth physics using a compute shader (OpenGL 4.3 or higher)
-- Add bounding boxes/spheres and collision detection for cloth physics. These bounding spheres will be beneficial to future collision testing as well.
 - Switch development to Vulkan
 - Endless features! (SSAO, Deferred Rendering, etc.)
 
