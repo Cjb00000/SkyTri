@@ -11,9 +11,7 @@ References used:
 - Verlet integrated cloth physics with Position Based Dynamics constraint projection (Jakobsen method) for spring and collision constraints
 - Depth-based post-processing effects via a custom framebuffer
 
-https://github.com/user-attachments/assets/6385bc9d-271f-4986-b6b8-a146b582368d
-
-
+https://github.com/user-attachments/assets/9136086b-33f6-431a-9c53-075e07ca42b2
 
 ## How it works
 
