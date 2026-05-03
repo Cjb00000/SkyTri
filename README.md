@@ -3,9 +3,9 @@
 A real-time OpenGL-based 3D rendering engine built with OpenGL 3.3, Assimp, GLFW, GLM, Glad and ImGui.
 
 References used:
--https://learnopengl.com/
 
--https://www.cs.cmu.edu/afs/cs/academic/class/15462-s13/www/lec_slides/Jakobsen.pdf
+- https://learnopengl.com/
+- https://www.cs.cmu.edu/afs/cs/academic/class/15462-s13/www/lec_slides/Jakobsen.pdf
 
 ## Current Highlights 
 - Verlet integrated cloth physics with Position Based Dynamics constraint projection (Jakobsen method) for spring and collision constraints
